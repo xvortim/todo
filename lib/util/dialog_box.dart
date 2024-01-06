@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:todo/util/my_button.dart';
 
 class DialogBox extends StatelessWidget {
   const DialogBox({super.key});
@@ -6,18 +7,24 @@ class DialogBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.amber,
       content: Container(
-        height: 120,
-        child: const Column(children: [
-          TextField(
-            decoration: InputDecoration(
-              border: OutlineInputBorder(),
-              hintText: "Add a new task",
+        height: 150,
+        child: const Column(
+          children: [
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                hintText: "Add a new task",
+              ),
             ),
-          ),
-          Row(children: []),
-        ]),
+            Row(
+              children: [
+                MyButton(text: 'Save', onPressed: () {}),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
