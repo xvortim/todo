@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:todo/util/dialog_box.dart';
 import 'package:todo/util/todo_tile.dart';
+import 'package:todo/database/db.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,13 +12,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  final _controller = TextEditingController();
-
-  List toDoList = [
-    ["Make Tutorial", false],
-    ["Do Exercise", false],
-  ];
-
   void checkBoxChanged(bool? value, int index) {
     setState(() {
       toDoList[index][1] = !toDoList[index][1];
@@ -26,9 +21,12 @@ class _HomePageState extends State<HomePage> {
   void saveNewTask() {
     setState(() {
       toDoList.add([_controller.text, false]);
+      _controller.clear();
       Navigator.of(context).pop();
     });
   }
+
+  final _controller = TextEditingController();
 
   void createNewTask() {
     showDialog(
@@ -41,6 +39,12 @@ class _HomePageState extends State<HomePage> {
         );
       },
     );
+  }
+
+  void deleteTask(int index) {
+    setState(() {
+      toDoList.removeAt(index);
+    });
   }
 
   @override
@@ -63,6 +67,7 @@ class _HomePageState extends State<HomePage> {
               taskName: toDoList[index][0],
               taskCompleted: toDoList[index][1],
               onChanged: (value) => checkBoxChanged(value, index),
+              deleteFunction: (context) => deleteTask(index),
             );
           }),
     );
