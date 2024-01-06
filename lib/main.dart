@@ -18,6 +18,7 @@ class MyApp extends StatelessWidget {
           color: Colors.amber,
         ),
         primarySwatch: Colors.amber,
+        primaryColor: Colors.amber,
       ),
       home: const HomePage(),
     );
